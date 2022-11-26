@@ -40,7 +40,11 @@ return new class extends Migration
             array(
                 'uuid' => Str::uuid(),
                 "title" => "CCSL",
-                "description" => "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
+                "description" => "Le CCSL est un meeting du genre Cars & Coffee destiné à tout passionnés d'automobile ayant lieu tout les 1er dimanche du mois
+
+                Ce situant sur le parking du centre commercial de Signy Centre, il est devenu le point de rencontre incontournable de la région lémanique pour tout les propriétaires de véhicules sportif, de collection ou décalé.
+                
+                Venez à la rencontre à partir de 9h45 jusqu'au environ de midi !",
                 "startDateTime" => new DateTime("2022-12-04 09:30:00"),
                 "latitude" => 46.39724100,
                 "longitude" => 6.20644300,

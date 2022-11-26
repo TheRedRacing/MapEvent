@@ -25,7 +25,13 @@
                 <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> 135 people responded</div>
                 <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> {{$event->username}}'s event</div>
                 <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-globe"></i> Public  · Everyone on or off MapEvent</div>
+                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2">
+                    @if($event->private == 0)
+                        <i class="text-gray-400 fas fa-fw fa-globe"></i> Public  · Everyone can see it
+                    @else
+                        <i class="text-gray-400 fas fa-fw fa-lock"></i> Private  · Nobody can see it
+                    @endif
+                </div>
             </div>
             <hr class="container mx-auto border-gray-700 border-1 my-2">
             <div class="break-words text-white">
