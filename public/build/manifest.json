@@ -1,11 +1,16 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.d426e523.js",
+    "file": "assets/app.5a613622.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
+  "node_modules/@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css": {
+    "file": "assets/SearchBox.ec41b958.css",
+    "src": "node_modules/@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css",
+    "isEntry": true
+  },
   "resources/css/app.css": {
-    "file": "assets/app.4edfed97.css",
+    "file": "assets/app.2f652dd3.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
