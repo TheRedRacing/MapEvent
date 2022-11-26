@@ -275,7 +275,7 @@ class HomeController extends Controller
         App::setLocale(Auth::user()->language);
         
         $mapsettings = json_decode(Auth::user()->mapview);
-        return view('Home',compact('country_items','mapsettings'));
+        return view('home',compact('country_items','mapsettings'));
     }
 
     public function store(Request $request)
