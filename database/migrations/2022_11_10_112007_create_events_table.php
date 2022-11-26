@@ -44,7 +44,7 @@ return new class extends Migration
                 "startDateTime" => new DateTime("2022-12-04 09:30:00"),
                 "latitude" => 46.39724100,
                 "longitude" => 6.20644300,
-                "fullAddress" => "",
+                "fullAddress" => "En Fléchère 7A, 1274 Signy-Avenex, Suisse",
                 "country" => "ch",
                 "private" => false,
                 "user_id" => 1,
