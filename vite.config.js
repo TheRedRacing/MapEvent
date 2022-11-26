@@ -5,9 +5,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'node_modules/@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css',
+                'resources/css/searchbox.css',
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/css/tagify.css',
             ],
             refresh: true,
         }),

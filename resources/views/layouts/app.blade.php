@@ -15,9 +15,7 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css','resources/css/tagify.css', 'resources/js/app.js'])
-
-        <link rel="stylesheet" href="build/assets/searchbox.css">
+        @vite(['resources/css/app.css','resources/css/searchbox.css','resources/css/tagify.css', 'resources/js/app.js'])
 
         <!-- External link -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>

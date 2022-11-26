@@ -5,8 +5,13 @@
     "isEntry": true
   },
   "resources/css/searchbox.css": {
-    "file": "assets/SearchBox.ec41b958.css",
+    "file": "assets/searchbox.b9f62af0.css",
     "src": "resources/css/searchbox.css",
+    "isEntry": true
+  },
+  "resources/css/tagify.css": {
+    "file": "assets/tagify.3a7ff5bf.css",
+    "src": "resources/css/tagify.css",
     "isEntry": true
   },
   "resources/css/app.css": {
