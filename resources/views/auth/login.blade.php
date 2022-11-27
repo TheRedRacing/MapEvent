@@ -50,8 +50,8 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-400 hover:text-white" href="{{ route('register') }}">
-                    {{ __('Not registered?') }}
+                <a class="underline text-sm text-gray-400 hover:text-white" href="/">
+                    {{ __('Not registered ? (Soon)') }}
                 </a>
 
                 <x-primary-button class="ml-3">
