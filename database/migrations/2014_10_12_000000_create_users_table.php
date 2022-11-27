@@ -45,6 +45,17 @@ return new class extends Migration
                 "password" => Hash::make('1997Miata$'),
             )
         );
+
+        DB::table('users')->insert(
+            array(
+                'uuid' => Str::uuid(),
+                "firstname" => "démo",
+                "lastname" => "démo",
+                "username" => "Beta-Tester",
+                "email" => "demo@demo.com",
+                "password" => Hash::make('1234Test'),
+            )
+        );
     }
 
     /**
