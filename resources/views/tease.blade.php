@@ -25,19 +25,12 @@
     
     <body class="antialiased bg-gray-900 overflow-hidden">
         <header class="text-gray-400 bg-gray-900 body-font">
-            <div class="mx-auto w-full flex flex-wrap py-5 px-10 flex-col md:flex-row items-center">
+            <div class="mx-auto w-full flex flex-wrap justify-between py-5 px-10 flex-col md:flex-row items-center">
                 <a class="flex justify-center title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">
                     <span class="flex justify-center items-center w-10 h-10 text-white p-2 bg-green-700 rounded-full"><i class="fas fa-fw fa-map"></i></span>
                     <span class="ml-3 text-xl">MapEvents</span>
-                </a>
+                </a>               
                 
-                <nav class="md:ml-auto md:mr-auto flex gap-5 flex-wrap items-center text-base justify-center cursor-pointer">
-                    <a class="hover:text-white">{{__('welcome.Home')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Feature')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Support')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Blog / News')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Careers')}}</a>
-                </nav>
                 
                 <div class="flex items-center justify-center gap-3 text-white cursor-pointer">   
                     @if (Route::has('login'))                    
