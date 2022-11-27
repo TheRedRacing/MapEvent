@@ -19,8 +19,8 @@ return [
     'Blog / News' => 'Blog / News',
     'Careers' => 'Careers',
     'Go to app' => 'Go to app',
-    'Log in' => 'Log in',
-    'Register' => 'Register',
+    'Log in' => 'Sign In',
+    'Register' => 'Sign Up',
     
     'Language' => 'Language',
     'English' => 'English',

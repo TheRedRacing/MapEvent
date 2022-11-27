@@ -14,12 +14,12 @@ class WelcomeController extends Controller
     */
     public function create()
     {
-        return view('welcome');
+        return view('tease');
     }
 
     public function store(Request $request) 
     {
         App::setLocale($request->changeLanguage);
-        return view('welcome');
+        return view('tease');
     }
 }

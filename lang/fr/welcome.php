@@ -19,7 +19,7 @@ return [
     'Blog / News' => 'Blog / Actualités',
     'Careers' => "Offres d'emploi",
     'Go to app' => "Aller vers l'application",
-    'Log in' => "S'identifier",
+    'Log in' => "Se connecter",
     'Register' => "S'inscrire",
     
     'Language' => 'Langue',

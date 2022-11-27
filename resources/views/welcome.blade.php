@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -266,5 +267,25 @@
                 </div>
             </div>
         </footer>
+
+        <div id="info-popup" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed bottom-0 left-0">
+            <div class="relative p-4 w-full max-w-lg h-auto">
+                <div class="relative rounded-lg shadow bg-gray-800 p-8">
+                    <div class="mb-4 text-sm font-light text-gray-400">
+                        <h3 class="mb-3 text-2xl font-bold text-white">Privacy info</h3>
+                        <p>
+                            The backup created with this export functionnality may contain some sensitive data. We suggest you to save this archive in a securised location.
+                        </p>
+                    </div>
+                    <div class="justify-between items-center space-y-2">
+                        <a href="#" class="font-medium text-green-600 hover:underline">Learn more about privacy</a>
+                        <div class="items-center space-x-2">
+                            <button id="close-modal" type="button"  class="py-2 px-4 w-full text-sm font-medium rounded-lg border sm:w-auto focus:ring-4 focus:outline-none text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600">Cancel</button>
+                            <button id="confirm-button" type="button" class="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-green-700 sm:w-auto hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

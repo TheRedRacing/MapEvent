@@ -15,14 +15,12 @@ Alpine.start();
 var map = null;
 var api = "GEJuHmudX7SntHEluTxaRHqQFHnCwSCU";
 var csrf = $('meta[name="csrf-token"]')[0].content;
-var mapView = "";
-if($("#mapzoom").length > 0){
-    mapView = $("#mapzoom").text();
-    mapView = mapView.split(", ");
-}
-else { mapView = false; }
-var z = (mapView != false) ? mapView[2].replace("x","") : 0;
-var c = (mapView != false) ? [mapView[1],mapView[0]] : [0,0];
+var mapView = $('#map')[0].attributes.defaultView.value;
+mapView = mapView.split(',');
+console.log(mapView)
+
+var z = (mapView != "") ? mapView[2].replace("x","") : 0;
+var c = (mapView != "") ? [mapView[1],mapView[0]] : [0,0];
 var l = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language;
 
 if($("#searchbox").length > 0){
