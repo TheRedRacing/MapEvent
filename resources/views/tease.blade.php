@@ -59,7 +59,7 @@
         
         <div class="absolute inset-0 -z-10 flex items-center justify-center">        
             <div class="bg-green-700 rounded-lg p-10 text-white" x-data="beer()" x-init="start()">
-                <h1 class="font-bold text-4xl md:text-5xl mb-10">MapEvents Comming Soon</h1>
+                <h1 class="font-bold text-4xl md:text-5xl mb-10">MapEvents Will Open</h1>
                 <div class="text-6xl text-center flex w-full items-center justify-center">
                     <div class="text-2xl mr-1 font-medium">in</div>
                     <div class="w-24 mx-1 p-2 bg-white text-green-500 rounded-lg">
