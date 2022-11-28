@@ -78,7 +78,7 @@
 
 
         <footer class="absolute bottom-0 left-0 right-0">
-            <div class="bg-gray-800">
+            <div class="bg-gray-900">
                 <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p class="text-gray-400 text-sm text-center sm:text-left">© 2022 MapEvents —
                         <a href="https://www.instagram.com/makcnmas/" rel="noopener noreferrer" class="text-gray-500 ml-1" target="_blank">@makcnmas</a>
