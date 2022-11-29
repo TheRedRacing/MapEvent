@@ -23,10 +23,10 @@
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     
-    <body class="antialiased bg-gray-900 overflow-hidden">
-        <header class="text-gray-400 bg-gray-900 body-font">
-            <div class="mx-auto w-full flex flex-wrap justify-between py-5 px-10 flex-col md:flex-row items-center">
-                <a class="flex justify-center title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">
+    <body class="antialiased bg-gray-900 overflow-hidden h-screen flex flex-col justify-between items-center">
+        <header class="w-screen text-gray-400 bg-gray-900 body-font">
+            <div class="mx-auto w-full flex flex-row justify-between items-center py-5 px-10">
+                <a class="flex justify-center title-font font-medium items-center text-white mb-0 cursor-pointer">
                     <span class="flex justify-center items-center w-10 h-10 text-white p-2 bg-green-700 rounded-full"><i class="fas fa-fw fa-map"></i></span>
                     <span class="ml-3 text-xl">MapEvents</span>
                 </a>               
@@ -35,11 +35,11 @@
                 <div class="flex items-center justify-center gap-3 text-white cursor-pointer">   
                     @if (Route::has('login'))                    
                         @auth
-                            <a href="{{ url('/home') }}" class="inline-flex items-center gap-2 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
+                            <a href="{{ url('/home') }}" class="inline-flex items-center gap-2 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base">
                                 {{__('welcome.Go to app')}}                                
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-gray-400 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-base mt-4 md:mt-0">
+                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-gray-400 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-base">
                                 {{__('welcome.Log in')}}
                             </a>
                         @endauth
@@ -48,27 +48,27 @@
             </div>
         </header>      
         
-        <img src="{{ URL::to('/') }}/img/map-bg.png" class="absolute top-20 left-0 right-0 bottom-14 -z-20" alt="">
-        
-        <div class="absolute inset-0 -z-10 flex items-center justify-center">        
-            <div class="bg-green-700 rounded-lg p-10 text-white" x-data="beer()" x-init="start()">
-                <h1 class="font-bold text-4xl md:text-5xl mb-10">MapEvents Will Open</h1>
-                <div class="text-6xl text-center flex w-full items-center justify-center">
+        <div class="flex-grow w-screen flex justify-center items-center" style="background-image: url('{{ URL::to(`/`) }}/img/map-bg.png;')">
+            <div class="w-4/5 bg-green-700 rounded-lg p-2.5 md:p-10 text-white" x-data="beer()" x-init="start()">
+                <h1 class="font-bold text-center text-2xl mb-2 md:text-5xl md:mb-10">MapEvents Will Open</h1>
+                <div class="w-full text-center flex flex-col items-center justify-center gap-1 text-3xl md:flex-row md:text-6xl md:gap-4">
                     <div class="text-2xl mr-1 font-medium">in</div>
-                    <div class="w-24 mx-1 p-2 bg-white text-green-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="days">00</div>
-                        <div class="font-mono uppercase text-sm font-medium leading-none">Days</div>
+                    <div class="flex justify-center items-center gap-1 md:gap-4">
+                        <div class="w-24 p-2 bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="days">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Days</div>
+                        </div>
+                        <div class="w-24 p-2 bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="hours">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Hours</div>
+                        </div>
+                        <div class="w-24 p-2 bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="minutes">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Minutes</div>
+                        </div>
                     </div>
-                    <div class="w-24 mx-1 p-2 bg-white text-green-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="hours">00</div>
-                        <div class="font-mono uppercase text-sm font-medium leading-none">Hours</div>
-                    </div>
-                    <div class="w-24 mx-1 p-2 bg-white text-green-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="minutes">00</div>
-                        <div class="font-mono uppercase text-sm font-medium leading-none">Minutes</div>
-                    </div>
-                    <div class="text-2xl mx-1 font-medium">and</div>
-                    <div class="w-24 mx-1 p-2 bg-white text-green-500 rounded-lg">
+                    <div class="text-2xl font-medium">and</div>
+                    <div class="w-24 p-2 bg-white text-green-500 rounded-lg">
                         <div class="font-mono leading-none" x-text="seconds">00</div>
                         <div class="font-mono uppercase text-sm font-medium leading-none">Seconds</div>
                     </div>
@@ -77,7 +77,7 @@
         </div>
 
 
-        <footer class="absolute bottom-0 left-0 right-0">
+        <footer class="w-screen">
             <div class="bg-gray-900">
                 <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p class="text-gray-400 text-sm text-center sm:text-left">© 2022 MapEvents —
