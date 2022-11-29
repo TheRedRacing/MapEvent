@@ -3,7 +3,8 @@
         <span class="text-white text-5xl animate-spin"><i class="fad fa-tire"></i></span>
     </div>    
 
-    <div class="absolute top-1 left-1 right-1 md:top-5 md:left-5 md:right-5 z-20 flex flex-col md:flex-row justify-between items-center gap-5">
+    <!-- Desktop View -->
+    <div class="hidden absolute top-5 left-5 right-5 z-20 md:flex flex-row justify-between items-center gap-5">
         <div class="flex justify-between items-center bg-gray-950 h-12 rounded-lg text-white relative">
             <div id="toggle-menu" class="p-5 cursor-pointer">
                 <i class="fas fa-fw fa-arrow-alt-from-left"></i>
@@ -24,7 +25,7 @@
     </div>   
 
     <div id="map" getdata="true" defaultView="{{ $mapsettings->lat }}, {{ $mapsettings->lng }}, {{ $mapsettings->zoom }}x" class="w-full h-screen z-10"></div>
-    <div class="absolute bottom-0 z-30 w-full bg-gray-950 rounded-t-3xl flex flex-col justify-start items-center">
+    <div class="absolute bottom-0 z-30 w-full bg-gray-800 rounded-t-3xl flex flex-col justify-start items-center">
         <span class="w-10 h-1 bg-gray-300 rounded-xl mt-2"></span>
         <div class="w-full flex items-center justify-start gap-4 pt-2 px-4 pb-4">
             <span class="w-16 h-16 rounded-full bg-cover" style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/2982fc7cc04a2e7a76172f52e7877197/photo-1561043845-2f5e09749871.jpg');"></span>
@@ -35,7 +36,7 @@
             </div>
         </div>
         <div class="w-full grid grid-cols-4 justify-start gap-4 px-4 pb-4">
-            <a class="col-span-2 inline-flex items-center justify-center gap-2 p-2 min-w-[50px] h-[38px] bg-gray-700 border border-transparent rounded-full font-semibold text-sm text-white tracking-widest hover:bg-gray-600 active:bg-gray-600 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+            <a href="events/" class="col-span-2 inline-flex items-center justify-center gap-2 p-2 min-w-[50px] h-[38px] bg-gray-700 border border-transparent rounded-full font-semibold text-sm text-white tracking-widest hover:bg-gray-600 active:bg-gray-600 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                 <i class="fas fa-fw fa-info-circle"></i> More details  
             </a>
             <button class="inline-flex items-center justify-center gap-2 p-2 h-[38px] bg-gray-700 border border-transparent rounded-full font-semibold text-sm text-white tracking-widest hover:bg-gray-600 active:bg-gray-600 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">

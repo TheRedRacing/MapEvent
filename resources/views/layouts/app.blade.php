@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css','resources/css/searchbox.css','resources/css/tagify.css', 'resources/js/app.js'])
+        <style>html, body {overflow-x: hidden;}</style>
 
         <!-- External link -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
@@ -26,7 +27,7 @@
         <!-- Searchbox -->
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased relative">
         <div class="bg-gray-900 flex justify-start items-center w-full h-screen relative overflow-hidden">
             @include('layouts.navigation')
 
