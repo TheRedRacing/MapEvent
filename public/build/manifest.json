@@ -9,14 +9,14 @@
     "src": "resources/css/searchbox.css",
     "isEntry": true
   },
+  "resources/css/app.css": {
+    "file": "assets/app.d6fae8ff.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
   "resources/css/tagify.css": {
     "file": "assets/tagify.3a7ff5bf.css",
     "src": "resources/css/tagify.css",
-    "isEntry": true
-  },
-  "resources/css/app.css": {
-    "file": "assets/app.e98a057b.css",
-    "src": "resources/css/app.css",
     "isEntry": true
   }
 }

@@ -1,9 +1,9 @@
-<nav class="bg-gray-950 h-screen pb-2 pt-5 px-2 flex flex-col w-nav hover:w-navhover transition-all ease-linear">                
+<nav id="navbar" class="absolute top-0 -left-[300px] z-50 md:relative md:top-auto md:left-auto md:w-[80px] w-[300px] md:hover:w-[250px] bg-gray-950 h-screen pb-2 pt-5 px-2 flex flex-col transition-all ease-linear">                
     <!-- Logo -->
     <x-application-logo-inline/>
-    <hr>
-    <ul class="flex flex-col justify-between" style="height:calc(100vh - 6vh);">
-        <div>
+    <hr class="my-2">
+    <ul class="flex flex-col justify-between h-[94vh]">
+        <div class="space-y-2">
             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 <i class="fas fa-fw fa-home-alt text-xl" style="min-width: 60px;"></i>
                 <span class="text-base font-normal overflow-hidden whitespace-nowrap transition-opacity">{{ __('navigation.Home') }}</span>

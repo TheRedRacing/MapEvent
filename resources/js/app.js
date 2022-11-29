@@ -534,3 +534,4 @@ $("#btnToGetCenter").on("click", () => {
 $('#deleteButton').on('click', function (e) {
     console.log(e.target.attributes[2].value)
 });
+

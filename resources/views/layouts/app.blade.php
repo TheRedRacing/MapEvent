@@ -27,7 +27,7 @@
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="bg-gray-900 flex justify-start items-center w-full h-screen overflow-hidden">
+        <div class="bg-gray-900 flex justify-start items-center w-full h-screen relative overflow-hidden">
             @include('layouts.navigation')
 
             <!-- Page Content -->
