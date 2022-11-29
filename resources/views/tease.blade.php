@@ -48,7 +48,7 @@
             </div>
         </header>      
         
-        <div class="flex-grow w-screen flex justify-center items-center" style="background-image: url('{{ URL::to(`/`) }}/img/map-bg.png;')">
+        <div class="flex-grow w-screen flex justify-center items-center">
             <div class="w-4/5 bg-green-700 rounded-lg p-2.5 md:p-10 text-white" x-data="beer()" x-init="start()">
                 <h1 class="font-bold text-center text-2xl mb-2 md:text-5xl md:mb-10">MapEvents Will Open</h1>
                 <div class="w-full text-center flex flex-col items-center justify-center gap-1 text-3xl md:flex-row md:text-6xl md:gap-4">
