@@ -32,6 +32,10 @@ Route::get('/newevents', [newEventController::class, 'create'])->middleware(['au
 
 Route::get('/events', [EventsController::class, 'create'])->middleware(['auth', 'verified'])->name('events');
 Route::get('/events/{uuid?}', [EventsController::class, 'getOne'])->name('events');
+Route::post('/events/{uuid?}', [EventsController::class, 'action'])->middleware(['auth', 'verified'])->name('events');
+
+
+
 
 Route::get('/explore', [ExploreController::class, 'create'])->middleware(['auth', 'verified'])->name('explore');
 Route::get('/news', function () { return view('news'); })->middleware(['auth', 'verified'])->name('news');

@@ -17,7 +17,6 @@ var api = "GEJuHmudX7SntHEluTxaRHqQFHnCwSCU";
 var csrf = $('meta[name="csrf-token"]')[0].content;
 var mapView = $('#map')[0].attributes.defaultView.value;
 mapView = mapView.split(',');
-console.log(mapView)
 
 var z = (mapView != "") ? mapView[2].replace("x","") : 0;
 var c = (mapView != "") ? [mapView[1],mapView[0]] : [0,0];
@@ -522,8 +521,16 @@ if($('input[name=tags]').length > 0){
     var tagify = new Tagify(input,{maxTags: 5});
 }
 
+
+
+
+
 $("#btnToGetCenter").on("click", () => {
     let centerOfView = map.getCenter();
     $("#latitude").val(centerOfView.lat);
     $("#longitude").val(centerOfView.lng);
+});
+
+$('#deleteButton').on('click', function (e) {
+    console.log(e.target.attributes[2].value)
 });
