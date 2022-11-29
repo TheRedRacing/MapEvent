@@ -28,7 +28,8 @@ class EventsController extends Controller
         
         $allreadyJoined = (Auth::user()) ? DB::table('events_users')->where('events_id', '=', $event->id)->where('user_id','=',Auth::user()->id)->first('choice') : null ;
         
-        $allParticipant = (Auth::user()->id == $event->user_id) ?
+
+        $allParticipant = (Auth::user() && Auth::user()->id == $event->user_id) ?
              DB::table('events_users')
             ->join('users', 'users.id', '=', 'user_id')
             ->where('events_id','=', $event->id)->get() : null;
