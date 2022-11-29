@@ -23,7 +23,7 @@
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     
-    <body class="antialiased bg-gray-900 overflow-hidden h-screen flex flex-col justify-between items-center">
+    <body class="antialiased bg-gray-900 overflow-hidden h-screen flex flex-col justify-between items-center bg-cover" style="background-image: url('/img/map-bg.png');">
         <header class="w-screen text-gray-400 bg-gray-900 body-font">
             <div class="mx-auto w-full flex flex-row justify-between items-center py-5 px-10">
                 <a class="flex justify-center title-font font-medium items-center text-white mb-0 cursor-pointer">
@@ -49,7 +49,7 @@
         </header>      
         
         <div class="flex-grow w-screen flex justify-center items-center">
-            <div class="w-4/5 bg-green-700 rounded-lg p-2.5 md:p-10 text-white" x-data="beer()" x-init="start()">
+            <div class="bg-green-700 rounded-lg p-2.5 w-4/5 md:w-1/2 md:p-10 text-white" x-data="beer()" x-init="start()">
                 <h1 class="font-bold text-center text-2xl mb-2 md:text-5xl md:mb-10">MapEvents Will Open</h1>
                 <div class="w-full text-center flex flex-col items-center justify-center gap-1 text-3xl md:flex-row md:text-6xl md:gap-4">
                     <div class="text-2xl mr-1 font-medium">in</div>
