@@ -99,6 +99,8 @@ if($("#map").length > 0){
         snapZoom: 1,
     });
 
+    map.TouchZoomRotateHandler.disableRotation();
+
     if($('#map')[0].attributes.setLatLng && dataFromDb == false)
     {
         var data = $('#map')[0].attributes.setLatLng.value.split(',');
