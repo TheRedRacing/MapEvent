@@ -92,7 +92,7 @@ if($("#map").length > 0){
         scrollZoom: true,
         boxZoom: false,
         dragRotate: false,
-        touchZoomRotate: false,
+        touchZoomRotate: true,
         pitchWithRotate: false,
         doubleClickZoom: false,
         maxZoom: 18,
