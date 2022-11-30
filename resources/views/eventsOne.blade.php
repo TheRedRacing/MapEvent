@@ -1,6 +1,6 @@
 <x-app-layout>    
-    <div class="md:min-h-screen overflow-y-scroll h-screen md:max-h-screen grid items-start md:grid-cols-3 gap-4 md:p-4 pb-24">
-        <div class="md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-20 md:col-span-2 md:row-span-4 p-4 cursor-pointer relative">
+    <div class="md:min-h-screen overflow-y-scroll h-screen grid items-start md:grid-cols-3 gap-4 md:p-4">
+        <div class="h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-20 md:col-span-2 md:row-span-4 p-4 cursor-pointer relative">
             @if (session()->has('alert'))
             <div class="absolute top-4 left-4 right-4">
             <x-alert :message="session('alert.message')" :level="session('alert.type')" class="rounded-b-none" />
@@ -8,18 +8,18 @@
             @endif
             <div class="w-full h-[30vh] bg-cover bg-center rounded-lg mb-4" style="background-image: url('{{$event->cover}}');"></div>
             <div class="text-red-500 text-lg font-bold">{{$date}}</div>
-            <div class="flex flex-col justify-start md:flex-row md:justify-between md:items-center">
+            <div class="flex flex-wrap justify-between items-center">
                 <span class="text-white text-xl font-bold">{{$event->title}}</span>  
-                <div class="flex justify-between md:justify-end gap-2 py-2"> 
+                <div class="flex justify-end gap-2 py-2"> 
                     @if (Auth::user())
                         @if(Auth::user()->id != $event->id)       
                             <form action="" method="post" class="flex justify-end gap-2">
                                 @csrf
-                            <!-- Default -->
+                            
                             @if($allreadyJoined == null)
                                 <x-secondary-button type="submit" name="choice" value="Interested"><i class="fal fa-fw fa-star"></i> Interested</x-secondary-button>
                                 <x-secondary-button type="submit" name="choice" value="Going"><i class="fal fa-check-circle"></i> Going</x-secondary-button>
-                            <!-- Joined -->
+                            
                             @elseif($allreadyJoined)
                                 @if($allreadyJoined->choice == 0)
                                     <x-primary-button><i class="fal fa-fw fa-star"></i> Interested</x-secondary-button>
@@ -102,7 +102,7 @@
                 {{$event->description}}
             </div>
         </div>        
-        <!-- <div class="p-4 rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-25 flex justify-center items-center">
+       <div class="p-4 rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-25 flex justify-center items-center">
             <div class="grid grid-cols-6 gap-2 text-black text-6xl bg-yellow-200 rounded-lg p-2">
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
@@ -111,12 +111,12 @@
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
             </div>
-        </div> -->
-        <div class="w-full row-span-1 h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
+        </div>
+        <div class="w-full h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
             <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
             <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
         </div>    
-        <div class="row-span-3 @if (Auth::user()) @if(Auth::user()->id == $event->id) h-full @endif @endif md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 mb-10 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
+        <div class="max-h-[400px] md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
             <div class="text-white text-xl font-bold">Guests</div>
             <div class="flex justify-between items-center text-white">
                 <div class="w-full px-3 py-2 5 rounded-lg flex flex-col items-center hover:bg-gray-700">
