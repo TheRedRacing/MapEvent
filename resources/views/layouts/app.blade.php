@@ -32,7 +32,7 @@
             @include('layouts.navigation')
 
             <!-- Page Content -->
-            <main class="w-full h-screen relative">
+            <main class="w-full h-screen relative md:min-h-screen overflow-y-scroll">
                 {{ $slot }}
             </main>
         </div>

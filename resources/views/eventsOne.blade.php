@@ -1,6 +1,6 @@
 <x-app-layout>    
-    <div class="md:min-h-screen overflow-y-scroll h-screen grid items-start md:grid-cols-3 gap-4 md:p-4">
-        <div class="h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-20 md:col-span-2 md:row-span-4 p-4 cursor-pointer relative">
+    <div class="grid items-start lg:grid-cols-3 gap-4 lg:p-4">
+        <div class="h-full lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-20 col-span-3 lg:col-span-2 lg:row-span-3 p-4 cursor-pointer relative">
             @if (session()->has('alert'))
             <div class="absolute top-4 left-4 right-4">
             <x-alert :message="session('alert.message')" :level="session('alert.type')" class="rounded-b-none" />
@@ -86,10 +86,10 @@
             <div class="text-gray-400 text-md">{{$event->fullAddress}}</div>
             <hr class="container mx-auto border-gray-700 border-1 my-2">
             <div class="flex flex-col text-white mb-2">
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> {{$guests[2]}} people responded</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> Event by {{$event->username}}</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2">
+                <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> {{$guests[2]}} people responded</div>
+                <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> Event by {{$event->username}}</div>
+                <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
+                <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2">
                     @if($event->private == 0)
                         <i class="text-gray-400 fas fa-fw fa-globe"></i> Public  · Everyone can see it
                     @else
@@ -102,7 +102,7 @@
                 {{$event->description}}
             </div>
         </div>        
-       <div class="p-4 rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-25 flex justify-center items-center">
+       <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex justify-center items-center">
             <div class="grid grid-cols-6 gap-2 text-black text-6xl bg-yellow-200 rounded-lg p-2">
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
@@ -112,11 +112,11 @@
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
             </div>
         </div>
-        <div class="w-full h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
+        <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
             <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
             <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
         </div>    
-        <div class="max-h-[400px] md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
+        <div class="w-full max-h-[400px] col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
             <div class="text-white text-xl font-bold">Guests</div>
             <div class="flex justify-between items-center text-white">
                 <div class="w-full px-3 py-2 5 rounded-lg flex flex-col items-center hover:bg-gray-700">
@@ -153,7 +153,9 @@
                 </div>
                 @endif
             @endif
-        </div>          
+        </div> 
+        
+        <div class="col-span-3 h-[10vh] lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25"></div>
     </div>
 
 
@@ -167,8 +169,8 @@
 
 
     <!-- Main modal -->
-    <div id="deleteModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+    <div id="deleteModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-modal lg:h-full">
+        <div class="relative p-4 w-full max-w-md h-full lg:h-auto">
             <!-- Modal content -->
             <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteModal">
