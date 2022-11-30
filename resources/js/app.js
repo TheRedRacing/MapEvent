@@ -63,7 +63,7 @@ if($("#map").length > 0){
         }
         var all_events = events();
         var points = [];
-        if(all_events != null){ all_events.forEach(element => { points.push({ coordinates: [element.longitude, element.latitude], properties: { id: element.id, cover: element.cover }}) }); }
+        if(all_events != null){ all_events.forEach(element => { points.push({ coordinates: [element.longitude, element.latitude], properties: { id: element.id, uuid: element.uuid, cover: element.cover }}) }); }
 
         /*Get Data here*/
         geoJson = {
@@ -90,7 +90,7 @@ if($("#map").length > 0){
         boxZoom: false,
         dragRotate: false,
         touchZoomRotate: false,
-        touchPitch: false,
+        touchPitch: true,
         pitchWithRotate: false,
         doubleClickZoom: false,
         maxZoom: 18,
@@ -208,59 +208,6 @@ $('#openNeweventForm').on("click", ()=>{
     $("#NeweventForm").show();
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getMapInfo() {
     var lat = getCenter().lat;
     var lng = getCenter().lng;
@@ -282,20 +229,20 @@ function refreshMarkers(){
         if (feature.properties && !feature.properties.cluster) {
             var id = parseInt(feature.properties.id, 10);
             if (!markersOnTheMap[id]) {
-                markersOnTheMap[id] = addEventMarker(feature.geometry.coordinates,feature.properties.cover, feature.properties.id);
+                markersOnTheMap[id] = addEventMarker(feature.geometry.coordinates,feature.properties.cover, feature.properties.uuid);
             }
         }
     });
 }
 
-function addEventMarker(latlng, cover, id){
+function addEventMarker(latlng, cover, uuid){
     let markerElement = document.createElement('div');  
     
     let zoom = map.getZoom()   
 
-    markerElement.className = 'event-'+ id+' block bg-center fit-cover bg-[length:100px] border-2 border-black rounded-md cursor-pointer';
+    markerElement.className = 'block bg-center fit-cover bg-[length:100px] border-2 border-black rounded-md cursor-pointer';
     markerElement.style.backgroundImage = "url("+cover+")"
-   
+    markerElement.id = uuid;   
 
     if(zoom >= 16){
         markerElement.className += " w-10 h-10";
@@ -313,23 +260,20 @@ function addEventMarker(latlng, cover, id){
         markerElement.className += " w-6 h-6";
     }
 
-    markerElement.addEventListener("click", markerClick, 'event-'+ id)
+    markerElement.addEventListener('click', openBottomModal, uuid)
 
     return new tt.Marker({element: markerElement, anchor: 'center'})
         .setLngLat(latlng)
         .addTo(map)
 }
 
-function markerClick(eventclick) {
-
-    let id = eventclick.target.classList[0];  
-    let marker = markersOnTheMap[id[id.length-1]];
-    
+function openBottomModal(marker){
+    let uuid = marker.target.id;
     var allevents = function () {
         var tmp;
         $.ajax({
             type:'POST',
-            url:'/getEvents/'+id[id.length-1],
+            url:'/getEvents/'+uuid,
             async: false,
             global: false,
             headers: {
@@ -341,98 +285,40 @@ function markerClick(eventclick) {
             }
         });
         return tmp;
-    }
-
-    $("#parent-tabs").html("");
-    $("#parent-btn-tabs").html("");
+    }    
 
     var all_events = allevents();
-    for (let i = 0; i < all_events.length; i++) {
-        const element = all_events[i];
-        generateEventCard(element,i+1)
-    }
-
     console.log(all_events);
+    $("#date").html(all_events['event'].startDateTime)
+    $("#title").html(all_events['event'].title)
+    $("#location").html(all_events['event'].fullAddress)
+    $("#cover").css("background-image", "url('"+all_events['event'].cover+"')");
+    $("#cover").removeClass("animate-pulse");
+    $("#moreDetailsButton").attr("href", "/events/"+all_events['event'].uuid);
 
-    $(".eventcard#1").css("display","flex");
-    $(".openEvent-1").addClass("active");
-
-    all_events[0].latitude = +(all_events[0].latitude);
-    all_events[0].longitude = +(all_events[0].longitude);
-
-    var latlng = new tt.LngLat(all_events[0].longitude, all_events[0].latitude);
-    console.log(latlng);
-    
-    map.setZoom(18);
-    map.setCenter(latlng);
-
-    $("#eventinfo").show();
-}
-
-function generateEventCard(event,nb){
-    //<div><i class="fas fa-fw fa-hashtag"></i> : `+event.tags+`</div>
-
-    let date = new Date(event.startDateTime);
-    console.log(date)
-
-    console.log(event)
-    $("#parent-tabs").append(`
-        <div class="eventcard w-full h-full bg-gray-950 rounded-tr-md rounded-br-md rounded-bl-md flex-col flex-nowrap justify-between" id="`+nb+`" style="height: 85vh; display:none;">
-            <div class="bg-cover bg-center relative rounded-tr-md" style="height:25vh; background-image: url('`+event.cover+`');">
-                <div class="absolute -bottom-8 left-4 w-16 h-16 bg-cover bg-center rounded-2xl border-8 border-gray-950" style="background-image: url('https://flagcdn.com/`+event.country+`.svg');"></div>
-            </div>
-            <div class="pt-8 px-5 pb-2.5 flex-grow flex flex-col justify-start gap-2.5">
-                <div class="text-2xl text-white flex justify-between items-center"><span>`+event.title+`</span><span>`+(event.private == 0 ? '<i class="far fa-globe"></i>' : '<i class="far fa-lock"></i>')+`</span></div>
-                <hr class="border-gray-600 border-1">
-                <div class="text-white flex flex-col gap-1">
-                    <div><i class="fas fa-fw fa-clock"></i> : `+event.startDateTime+` (Local Time)</div>
-                    <div><i class="fas fa-fw fa-map-pin"></i> : `+event.fullAddress+`</div>
-                    
-                    <div>0 Interessés • 0 Participants</div>
+    if(all_events['otherEvents'].length > 0){
+        all_events['otherEvents'].forEach(element => {
+            $("#otherEvents").append(`
+            <div class="h-16 rounded-lg bg-center bg-cover relative border-2 border-gray-500 hover:border-green-500 hover:-translate-y-1 transition-all duration-200 cursor-pointer" style="background-image: url('`+element.cover+`');">
+                <span class="absolute inset-0 from-transparent to-black rounded-lg bg-gradient-to-b"></span>
+                <div class="absolute inset-0 z-10 flex items-end justify-center text-white">
+                    <div>`+element.title+`</div>
                 </div>
-                <hr class="border-gray-600 border-1">
-                <div class="line-clamp-6 break-words text-white text-md">`+event.description+`</div>
-            </div>
-                
-            <div class="flex justify-between items-center gap-5 pt-2.5 px-5 pb-5">
-                <button class="border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 py-3 px-5 w-full flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700">
-                    <i class="fas fa-fw fa-check-square"></i> Participez
-                </button>
-                <button class="border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 py-3 px-5 w-full flex justify-center items-center gap-2 bg-gray-500 hover:bg-gray-600">
-                    <i class="fas fa-fw fa-star"></i> Intéressé(e)
-                </button>
-            </div>
-        </div>`
-    );
-
-    $("#parent-btn-tabs").append(`
-        <button class="event-tablinks openEvent-`+nb+` block w-12 h-12 bg-gray-800 text-white first:rounded-tl-md last:rounded-bl-md hover:bg-indigo-600">`+nb+`</button>
-    `);
-}
-
-$("#parent-btn-tabs").on("click",".event-tablinks", function(e){
-    openEvent(e,e.target.classList[1][e.target.classList[1].length-1])
-})
-
-function openEvent(evt, eventId) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("eventcard");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+            </div>`)
+        });
+        $("#otherParent").show();
     }
-    tablinks = document.getElementsByClassName("event-tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    else{
+        $("#otherParent").hide()
     }
-    document.getElementById(eventId).style.display = "flex";
-    evt.currentTarget.className += " active";
-}
 
-$(".event-card-close").on("click",function(e){
-    $("#eventinfo").hide();
-    map.setCenter(c);
-    map.zoomTo(z,{duration:1000});
-})
+    map.setZoom(15);
+    map.setCenter(new tt.LngLat(all_events['event'].longitude,all_events['event'].latitude));
+
+    $("#eventCard").animate({
+        bottom : '0px'
+    }, 800);
+}
 
 function handleResultSelection(event){
     var result = event.data.result;   

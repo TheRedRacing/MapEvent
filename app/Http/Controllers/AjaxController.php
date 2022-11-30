@@ -24,20 +24,28 @@ class AjaxController extends Controller
         return response()->json($events,200);
     }
 
-    public function getAllEventFromAddress($id){
+    public function getAllEventFromAddress($uuid){
+
         $event = DB::table('events')
-        ->where('id','=',$id)
+        ->where('uuid','=',$uuid)
         ->where('startDateTime','>',Carbon::now())
         ->limit(1)
-        ->get();
-
-        $allEventAddress = DB::table('events')
-        ->where('fullAddress','=',$event[0]->fullAddress)
+        ->first();
+        
+        $fullDate = Carbon::create($event->startDateTime);
+        $event->startDateTime = $fullDate->format('jS F Y h:i A');
+        
+        $otherEvent = $otherEvents = DB::table('events')
+        ->where('fullAddress','=',$event->fullAddress)
         ->where('startDateTime','>',Carbon::now())
+        ->where('uuid', '!=', $event->uuid)
         ->orderBy('startDateTime','asc')
         ->limit(4)
         ->get();
 
-        return response()->json($allEventAddress,200);
+        return response()->json(array(
+            "event" => $event,
+            "otherEvents" => $otherEvent
+        ),200);
     }
 }

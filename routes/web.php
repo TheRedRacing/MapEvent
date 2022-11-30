@@ -25,7 +25,7 @@ Route::post('/', [WelcomeController::class, 'store'])->name('welcome');
 
 //Home get and post page
 Route::get('/home', [HomeController::class, 'create'])->middleware(['auth', 'verified'])->name('home');
-Route::post('/home', [HomeController::class, 'store'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/home/{uuid?}', [HomeController::class, 'detail'])->middleware(['auth', 'verified'])->name('home');
 
 
 Route::get('/newevents', [newEventController::class, 'create'])->middleware(['auth', 'verified'])->name('newevents');
@@ -48,6 +48,6 @@ Route::get('/admin', [ProfileController::class, 'admin'])->middleware(['auth', '
 
 // AJax Call
 Route::post('/getEvents',[AjaxController::class, 'getAllValidEvent'])->middleware(['auth', 'verified']);
-Route::post('/getEvents/{id}',[AjaxController::class, 'getAllEventFromAddress'])->middleware(['auth', 'verified']);
+Route::post('/getEvents/{uuid}',[AjaxController::class, 'getAllEventFromAddress'])->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
