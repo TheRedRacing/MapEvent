@@ -26,15 +26,9 @@
     
     <!-- Mobile View -->
     <div class="absolute top-4 z-20 w-full px-2 flex md:flex-row-reverse justify-between gap-4">
-        <div class="space-x-1 md:hidden">
-            <button class="w-6 h-6 text-sm inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-bars"></i></button>
-            <button class="w-6 h-6 text-sm inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-user"></i></button>
-        </div>
-        <div id="mapzoom" class="text-xs flex-grow md:flex-grow-0 flex justify-center items-center bg-gray-950 md:px-5 h-6 md:h-8 rounded-3xl text-white">{{ $mapsettings->lat }}, {{ $mapsettings->lng }}, {{ $mapsettings->zoom }}x</div>
-        <div class="space-x-1">
-            <button class="w-6 h-6 text-sm md:w-8 md:h-8 inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-search"></i></button>
-            <button class="w-6 h-6 text-sm md:w-8 md:h-8 inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-cog"></i></button>
-        </div>
+        <button class="md:hidden w-8 h-8 text-sm inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-bars"></i></button>
+        <div id="mapzoom" class="text-xs flex-grow md:flex-grow-0 flex justify-center items-center bg-gray-950 md:px-5 h-8 rounded-3xl text-white">{{ $mapsettings->lat }}, {{ $mapsettings->lng }}, {{ $mapsettings->zoom }}x</div>
+        <button class="w-8 h-8 text-sm md:w-8 md:h-8 inline-flex justify-center items-center bg-gray-800 bg-opacity-25 rounded-full"><i class="fas fa-fw fa-search"></i></button>
     </div>
 
     <div id="map" getdata="true" defaultView="{{ $mapsettings->lat }}, {{ $mapsettings->lng }}, {{ $mapsettings->zoom }}x" class="w-full h-screen z-10"></div>
