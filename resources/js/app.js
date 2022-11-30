@@ -2,13 +2,15 @@ import './bootstrap';
 import jQuery, { css } from 'jquery';
 import Alpine from 'alpinejs';
 
+window.$ = jQuery;
+window.Alpine = Alpine;
+
 import tt from '@tomtom-international/web-sdk-maps';
 import { services } from '@tomtom-international/web-sdk-services';
 import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 import { set } from 'lodash';
 
-window.$ = jQuery;
-window.Alpine = Alpine;
+
 
 Alpine.start();
 
@@ -320,6 +322,14 @@ function openBottomModal(marker){
     }, 800);
 }
 
+$("#closeModal").on("click", () => {
+    $("#eventCard").animate({
+        bottom : '-100%'
+    }, 800);
+
+    map.zoomTo(10);
+});
+
 function handleResultSelection(event){
     var result = event.data.result;   
     searchMarker = new tt.Marker().setLngLat(result.position).addTo(map);
@@ -328,7 +338,6 @@ function handleResultSelection(event){
 }
 
 /* Step Form */
-
 if($('#stepForm').length > 0){
     var actualStep = 1;
     var nbStep = parseInt($('#stepForm')[0].attributes.stepform.value);
