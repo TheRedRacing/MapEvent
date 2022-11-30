@@ -99,7 +99,7 @@ if($("#map").length > 0){
         snapZoom: 1,
     });
 
-    map.TouchZoomRotateHandler.disableRotation();
+    map.touchZoomRotate.disableRotation();
 
     if($('#map')[0].attributes.setLatLng && dataFromDb == false)
     {
