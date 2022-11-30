@@ -1,14 +1,14 @@
 <x-app-layout>    
-    <div class="min-h-screen h-screen max-h-screen grid items-start grid-cols-3 gap-4 p-4">
-        <div class="rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-20 h-full col-span-2 row-span-4 p-4 cursor-pointer relative">
+    <div class="md:min-h-screen md:h-screen md:max-h-screen grid items-start md:grid-cols-3 gap-4 md:p-4 pb-24">
+        <div class="md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-20 md:col-span-2 md:row-span-4 p-4 cursor-pointer relative">
             @if (session()->has('alert'))
             <div class="absolute top-4 left-4 right-4">
             <x-alert :message="session('alert.message')" :level="session('alert.type')" class="rounded-b-none" />
             </div>
             @endif
-            <div class="w-full h-1/3 bg-cover bg-center rounded-lg mb-4" style="background-image: url('{{$event->cover}}');"></div>
+            <div class="w-full h-[30vh] bg-cover bg-center rounded-lg mb-4" style="background-image: url('{{$event->cover}}');"></div>
             <div class="text-red-500 text-lg font-bold">{{$date}}</div>
-            <div class="flex justify-between items-center">
+            <div class="flex flex-col justify-start  md:flex-row md:justify-between md:items-center">
                 <span class="text-white text-xl font-bold">{{$event->title}}</span>  
                 <div class="flex justify-end gap-2"> 
                     @if (Auth::user())
@@ -81,44 +81,7 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                
-                </div>
-                
-                
-                <!-- @if($allreadyJoined == null)
-                    <form action="events/{{$event->uuid}}/join" method="post" class="flex gap-2">
-                        @csrf
-                        <x-secondary-button value="Interested" name="choice"><i class="fal fa-fw fa-star"></i> Interested</x-secondary-button>
-                        <x-secondary-button value="Going" name="choice"><i class="fal fa-check-circle"></i> Going</x-secondary-button>
-                    </form>
-                    @else
-                    <form action="events/{{$event->uuid}}/join" method="post">
-                        @csrf
-                        @if($allreadyJoined->choice == 0)
-                            <x-secondary-button class="bg-green-700 hover:bg-green-800" value="Interested" name="choice"><i class="fal fa-fw fa-star"></i> Interested</x-secondary-button>
-                        @else
-                            <x-secondary-button class="bg-green-700 hover:bg-green-800" value="Going" name="choice"><i class="fal fa-check-circle"></i> Going</x-secondary-button>    
-                        @endif
-                    </form>
-                    @endif -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
+                </div>                    
             </div>      
             <div class="text-gray-400 text-md">{{$event->fullAddress}}</div>
             <hr class="container mx-auto border-gray-700 border-1 my-2">
@@ -149,11 +112,11 @@
                 <div class="p-2 bg-yellow-100 rounded-lg">0</div>
             </div>
         </div> -->
-        <div class="row-span-1 h-full rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-25 flex flex-col cursor-pointer">
+        <div class="w-full row-span-1 h-full md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
             <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
-            <div class="px-4 py-2 text-md font-medium text-white bg-gray-700 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
+            <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
         </div>    
-        <div class="row-span-3 @if (Auth::user()) @if(Auth::user()->id == $event->id) h-full @endif @endif rounded-lg border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
+        <div class="row-span-3 @if (Auth::user()) @if(Auth::user()->id == $event->id) h-full @endif @endif md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-10 md:py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
             <div class="text-white text-xl font-bold">Guests</div>
             <div class="flex justify-between items-center text-white">
                 <div class="w-full px-3 py-2 5 rounded-lg flex flex-col items-center hover:bg-gray-700">

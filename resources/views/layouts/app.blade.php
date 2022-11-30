@@ -28,11 +28,11 @@
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     <body class="font-sans antialiased relative">
-        <div class="bg-gray-900 flex justify-start items-center w-full h-screen relative overflow-hidden">
+        <div class="bg-gray-900 flex justify-start items-center w-full md:h-screen relative md:overflow-hidden">
             @include('layouts.navigation')
 
             <!-- Page Content -->
-            <main class="w-full h-screen relative">
+            <main class="w-full md:h-screen relative">
                 {{ $slot }}
             </main>
         </div>
