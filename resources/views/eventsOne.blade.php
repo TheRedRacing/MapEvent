@@ -1,5 +1,5 @@
 <x-app-layout>    
-    <div class="md:min-h-screen md:h-screen md:max-h-screen grid items-start md:grid-cols-3 gap-4 md:p-4 pb-24">
+    <div class="md:min-h-screen overflow-y-scroll h-screen md:max-h-screen grid items-start md:grid-cols-3 gap-4 md:p-4 pb-24">
         <div class="md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-20 md:col-span-2 md:row-span-4 p-4 cursor-pointer relative">
             @if (session()->has('alert'))
             <div class="absolute top-4 left-4 right-4">
@@ -8,9 +8,9 @@
             @endif
             <div class="w-full h-[30vh] bg-cover bg-center rounded-lg mb-4" style="background-image: url('{{$event->cover}}');"></div>
             <div class="text-red-500 text-lg font-bold">{{$date}}</div>
-            <div class="flex flex-col justify-start  md:flex-row md:justify-between md:items-center">
+            <div class="flex flex-col justify-start md:flex-row md:justify-between md:items-center">
                 <span class="text-white text-xl font-bold">{{$event->title}}</span>  
-                <div class="flex justify-end gap-2"> 
+                <div class="flex justify-between md:justify-end gap-2 py-2"> 
                     @if (Auth::user())
                         @if(Auth::user()->id != $event->id)       
                             <form action="" method="post" class="flex justify-end gap-2">
@@ -86,10 +86,10 @@
             <div class="text-gray-400 text-md">{{$event->fullAddress}}</div>
             <hr class="container mx-auto border-gray-700 border-1 my-2">
             <div class="flex flex-col text-white mb-2">
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> {{$guests[2]}} people responded</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> Event by {{$event->username}}</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
-                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 px-2">
+                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> {{$guests[2]}} people responded</div>
+                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> Event by {{$event->username}}</div>
+                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
+                <div class="inline-flex items-center gap-2 hover:bg-gray-700 rounded-md py-2 md:px-2">
                     @if($event->private == 0)
                         <i class="text-gray-400 fas fa-fw fa-globe"></i> Public  · Everyone can see it
                     @else
@@ -116,7 +116,7 @@
             <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
             <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
         </div>    
-        <div class="row-span-3 @if (Auth::user()) @if(Auth::user()->id == $event->id) h-full @endif @endif md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-10 md:py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
+        <div class="row-span-3 @if (Auth::user()) @if(Auth::user()->id == $event->id) h-full @endif @endif md:rounded-lg md:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 mb-10 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
             <div class="text-white text-xl font-bold">Guests</div>
             <div class="flex justify-between items-center text-white">
                 <div class="w-full px-3 py-2 5 rounded-lg flex flex-col items-center hover:bg-gray-700">
