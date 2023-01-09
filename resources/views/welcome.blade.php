@@ -16,11 +16,6 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-        <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js'></script>
-        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js"></script>
-        <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/services/services-web.min.js'></script>
-        <!-- Searchbox -->
-        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     
     <body class="antialiased bg-gray-900 overflow-hidden h-screen flex flex-col justify-between items-center bg-cover" style="background-image: url('/img/map-bg.png');">
@@ -150,13 +145,6 @@
                         this.seconds = '00';
                     }
                 },100);
-            },
-            padNum: function(num,number) {
-                var zero = '';
-                for (var i = 0; i < 3; i++) {
-                    zero += '0';
-                }
-                return (zero + num).slice(-3);
             }
         }
     }
