@@ -124,7 +124,7 @@
             days: '00',
             distance: 0,
             countdown: null,
-            openTime: new Date('April 30.2023 16:30:00').getTime(),
+            openTime: new Date('04.30.2023 16:30:00').getTime(),
             now: new Date().getTime(),
             start: function() {
                 this.countdown = setInterval(() => {
@@ -133,7 +133,7 @@
                     this.distance = this.openTime - this.now;
                     // Set Times
                     this.days = Math.floor(this.distance / (1000*60*60*24));                  
-                    this.hours = Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60));
+                    this.hours = this.padNum(Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60)));
                     this.minutes = Math.floor((this.distance % (1000*60*60)) / (1000*60));
                     this.seconds = Math.floor((this.distance % (1000*60)) / 1000);
                     // Stop
@@ -145,6 +145,13 @@
                         this.seconds = '00';
                     }
                 },100);
+            },
+            padNum: function(num,number) {
+                var zero = '';
+                for (var i = 0; i < 3; i++) {
+                    zero += '0';
+                }
+                return (zero + num).slice(-3);
             }
         }
     }
