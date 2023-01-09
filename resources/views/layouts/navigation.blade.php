@@ -1,4 +1,4 @@
-<nav id="navbar" class="absolute top-0 -left-[300px] z-50 md:relative md:top-auto md:left-auto md:w-[80px] w-[300px] md:hover:w-[250px] bg-gray-950 h-screen pb-2 pt-5 px-2 flex flex-col transition-all ease-linear">                
+<nav class="hidden bg-gray-950 h-screen py-2 px-2 lg:flex flex-col w-[80px] hover:w-[250px] transition-all ease-linear">                
     <!-- Logo -->
     <x-application-logo-inline/>
     <hr class="my-2">
@@ -42,7 +42,7 @@
             </x-nav-link>
         </div>
         @if (Auth::user())
-        <div>        
+        <div class="space-y-2">        
             <x-nav-link :href="route('profile', Auth::user()->username)" :active="request()->routeIs('profile')">
                 <i class="fas fa-fw fa-user text-xl" style="min-width: 60px;"></i>
                 <span class="overflow-hidden whitespace-nowrap transition-opacity">
@@ -63,7 +63,7 @@
             </form>            
         </div>
         @else
-        <div>        
+        <div class="space-y-2">       
             <x-nav-link :href="route('login')">
                 <i class="fas fa-fw fa-sign-in text-xl" style="min-width: 60px;"></i>
                 <span class="overflow-hidden whitespace-nowrap transition-opacity">

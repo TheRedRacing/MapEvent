@@ -4,10 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-
 return new class extends Migration
 {
     /**
@@ -19,43 +15,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
-            $table->string("firstname");
-            $table->string("lastname");
-            $table->string("username")->unique();
-            $table->string("email")->unique();
-            $table->timestamp("email_verified_at")->nullable();
-            $table->string("password");            
-            $table->string("country")->nullable();
-            $table->string("language")->default("en");
-            $table->string("picture")->default("default");
-            $table->string("mapview")->default(json_encode(['lat'=>"0.000",'lng'=>"0.000",'zoom'=>"1.0"]));
-            
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
-
-        DB::table('users')->insert(
-            array(
-                'uuid' => Str::uuid(),
-                "firstname" => "Maxime",
-                "lastname" => "Sickenberg",
-                "username" => "TheRedRacing",
-                "email" => "maxime.sickenberg@gmail.com",
-                "password" => Hash::make('1997Miata$'),
-            )
-        );
-
-        DB::table('users')->insert(
-            array(
-                'uuid' => Str::uuid(),
-                "firstname" => "demo",
-                "lastname" => "demo",
-                "username" => "Beta-Tester",
-                "email" => "demo@demo.com",
-                "password" => Hash::make('1234Test'),
-            )
-        );
     }
 
     /**

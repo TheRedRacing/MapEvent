@@ -1,5 +1,5 @@
 <x-app-layout>    
-    <div class="grid items-start lg:grid-cols-3 gap-4 lg:p-4">
+    <div class="grid items-start lg:grid-cols-3 lg:gap-4 lg:p-4">
         <div class="h-full lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-20 col-span-3 lg:col-span-2 lg:row-span-3 p-4 cursor-pointer relative">
             @if (session()->has('alert'))
             <div class="absolute top-4 left-4 right-4">
@@ -42,7 +42,7 @@
                                 </button>
                             </x-slot>
 
-                            <x-slot name="content">
+                            <x-slot name="content" class="bg-gray-700">
                                 <x-dropdown-button>1</x-dropdown-button>
                                 <x-dropdown-button>2</x-dropdown-button>
                                 <x-dropdown-button>3</x-dropdown-button>
@@ -61,7 +61,7 @@
                                 </button>
                             </x-slot>
 
-                            <x-slot name="content">
+                            <x-slot name="content" class="bg-gray-700">
                                 @if($allreadyJoined)
                                 <form action="" method="post">
                                     @csrf
@@ -85,7 +85,7 @@
             </div>      
             <div class="text-gray-400 text-md">{{$event->fullAddress}}</div>
             <hr class="container mx-auto border-gray-700 border-1 my-2">
-            <div class="flex flex-col text-white mb-2">
+            <div class="flex flex-col text-white">
                 <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-users"></i> {{$guests[2]}} people responded</div>
                 <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-user"></i> Event by {{$event->username}}</div>
                 <div class="inline-flex items-center gap-2 lg:hover:bg-gray-700 rounded-md py-2 px-2"><i class="text-gray-400 fas fa-fw fa-map-marker-alt"></i> {{$event->fullAddress}}</div>
@@ -101,21 +101,8 @@
             <div class="break-words text-white">
                 {{$event->description}}
             </div>
-        </div>        
-       <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex justify-center items-center">
-            <div class="grid grid-cols-6 gap-2 text-black text-6xl bg-yellow-200 rounded-lg p-2">
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
-            </div>
-        </div>
-        <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
-            <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
-            <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
-        </div>    
+        </div> 
+        <hr class="lg:hidden col-span-3 container mx-auto border-gray-700 border-2">
         <div class="w-full max-h-[400px] col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 px-4 py-2 cursor-pointer flex flex-col justify-start overflow-hidden">
             <div class="text-white text-xl font-bold">Guests</div>
             <div class="flex justify-between items-center text-white">
@@ -154,19 +141,25 @@
                 @endif
             @endif
         </div> 
+        <hr class="lg:hidden col-span-3 container mx-auto border-gray-700 border-2">
+        <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex justify-center items-center">
+            <div class="grid grid-cols-6 gap-2 text-black text-4xl lg:text-6xl bg-yellow-200 rounded-lg p-2">
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+                <div class="p-2 bg-yellow-100 rounded-lg">0</div>
+            </div>
+        </div>
+        <hr class="lg:hidden col-span-3 container mx-auto border-gray-700 border-2">
+        <div class="w-full h-full col-span-3 lg:col-span-1 lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25 p-4 flex flex-col cursor-pointer">
+            <div id="map" getdata="false" defaultView="" setLatLng="{{$event->latitude}},{{$event->longitude}}" class="w-full h-80 flex-grow rounded-t-md"></div>
+            <div class="px-4 py-2 text-md font-medium text-white bg-gray-600 bg-opacity-25 rounded-b-lg hover:underline cursor-pointer">{{$event->fullAddress}}</div>
+        </div>    
         
-        <div class="col-span-3 h-[10vh] lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25"></div>
+        <!-- <div class="col-span-3 h-[10vh] lg:rounded-lg lg:border-2 border-gray-700 bg-gray-700 bg-opacity-25"></div> -->
     </div>
-
-
-
-
-
-
-
-
-
-
 
     <!-- Main modal -->
     <div id="deleteModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-modal lg:h-full">

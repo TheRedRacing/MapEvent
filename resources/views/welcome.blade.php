@@ -5,259 +5,89 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'MapEvents') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
 
         @vite(['resources/css/app.css'])
 
         <!-- External css -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+        <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js'></script>
+        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js"></script>
+        <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/services/services-web.min.js'></script>
+        <!-- Searchbox -->
+        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0/SearchBox-web.js"></script>
     </head>
     
-    <body class="antialiased bg-gray-900">
-        <header class="text-gray-400 bg-gray-900 body-font">
-            <div class="mx-auto w-full flex flex-wrap py-5 px-10 flex-col md:flex-row items-center">
-                <a class="flex justify-center title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">
+    <body class="antialiased bg-gray-900 overflow-hidden h-screen flex flex-col justify-between items-center bg-cover" style="background-image: url('/img/map-bg.png');">
+        <header class="w-screen text-gray-400 bg-gray-900 body-font">
+            <div class="mx-auto w-full flex flex-row justify-between items-center py-5 px-10">
+                <a class="flex justify-center title-font font-medium items-center text-white mb-0 cursor-pointer">
                     <span class="flex justify-center items-center w-10 h-10 text-white p-2 bg-green-700 rounded-full"><i class="fas fa-fw fa-map"></i></span>
                     <span class="ml-3 text-xl">MapEvents</span>
-                </a>
+                </a>               
                 
-                <nav class="md:ml-auto md:mr-auto flex gap-5 flex-wrap items-center text-base justify-center cursor-pointer">
-                    <a class="hover:text-white">{{__('welcome.Home')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Feature')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Support')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Blog / News')}}</a>
-                    <a class="hover:text-white">{{__('welcome.Careers')}}</a>
-                </nav>
                 
                 <div class="flex items-center justify-center gap-3 text-white cursor-pointer">   
-                    <div class="relative">
-                        <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="inline-flex items-center gap-2 bg-gray-800 text-gray-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0" type="button">
-                            {{__('welcome.Language')}}
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdown" class="absolute right-0 top-10 z-10 w-32 p-1 divide-y divide-gray-100 bg-gray-800 shadow rounded-md" style="display: none;">
-                            <form action="" method="POST">
-                                @csrf
-                                <div class="flex flex-col gap-1">
-                                    <button type="submit" value="en" name="changeLanguage" class="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-gray-700">
-                                        <img src="https://flagcdn.com/gb.svg" class="w-6 h-6 rounded-full object-cover"/>
-                                        {{__('welcome.English')}}
-                                    </button>
-                                    <button type="submit" value="fr" name="changeLanguage" class="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-gray-700">
-                                        <img src="https://flagcdn.com/fr.svg" class="w-6 h-6 rounded-full object-cover"/>
-                                        {{__('welcome.French')}}
-                                    </button>
-                                    <button type="submit" value="de" name="changeLanguage" class="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-gray-700">
-                                        <img src="https://flagcdn.com/de.svg" class="w-6 h-6 rounded-full object-cover"/>
-                                        {{__('welcome.German')}}
-                                    </button>
-                                    <button type="submit" value="it" name="changeLanguage" class="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-gray-700">
-                                        <img src="https://flagcdn.com/it.svg" class="w-6 h-6 rounded-full object-cover"/>
-                                        {{__('welcome.Italian')}}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                     @if (Route::has('login'))                    
                         @auth
-                            <a href="{{ url('/home') }}" class="inline-flex items-center gap-2 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
+                            <a href="{{ url('/home') }}" class="inline-flex items-center gap-2 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base">
                                 {{__('welcome.Go to app')}}                                
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-gray-400 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-base mt-4 md:mt-0">
+                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-gray-400 bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-base">
                                 {{__('welcome.Log in')}}
                             </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="inline-flex items-center gap-2 bg-green-700 border-0 py-1 px-3 focus:outline-none hover:bg-green-800 rounded text-base mt-4 md:mt-0">
-                                    {{__('welcome.Register')}}                                
-                                </a>
-                            @endif
                         @endauth
                     @endif  
                 </div>
             </div>
-        </header>
-        <section class="text-gray-400 bg-gray-900 body-font h-[calc(100vh-80px)] flex justify-center items-center">
-            <div class="flex items-center justify-center flex-col">
-                <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
-                <div class="text-center lg:w-2/3 w-full">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Microdosing synth tattooed vexillologist</h1>
-                    <p class="leading-relaxed mb-8">Meggings kinfolk echo park stumptown DIY, kale chips beard jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice godard disrupt ramps hexagon mustache umami snackwave tilde chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui celiac mlkshk freegan photo booth af fingerstache pitchfork.</p>
-                    <div class="flex justify-center">
-                        <button class="inline-flex text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-800 rounded text-lg">Button</button>
-                        <button class="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">Button</button>
-                    </div>
-                    <i class="fas pt-10 fa-chevron-down text-white cursor-pointer"></i>
-                </div>
-            </div>
-        </section>
-
-        <hr class="container mx-auto border-gray-600 border-1">
+        </header>      
         
-        <section class="text-gray-400 body-font">
-            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
-                </div>
-                <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Before they sold out
-                        <br class="hidden lg:inline-block">readymade gluten
-                    </h1>
-                    <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="container mx-auto border-gray-600 border-1">
-
-        <section class="text-gray-400 body-font">
-            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Before they sold out
-                        <br class="hidden lg:inline-block">readymade gluten
-                    </h1>
-                    <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
-                </div>
-                <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
-                </div>
-            </div>
-        </section>   
-        
-        <hr class="container mx-auto border-gray-600 border-1">
-
-        <section class="text-gray-400 body-font">
-            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
-                </div>
-                <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Before they sold out
-                        <br class="hidden lg:inline-block">readymade gluten
-                    </h1>
-                    <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="container mx-auto border-gray-600 border-1">
-
-        <section class="text-gray-400 body-font">
-            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Before they sold out
-                        <br class="hidden lg:inline-block">readymade gluten
-                    </h1>
-                    <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
-                </div>
-                <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
-                </div>
-            </div>
-        </section>   
-
-        <hr class="container mx-auto border-gray-600 border-1">
-
-        <footer class="text-gray-600 body-font cursor-pointer">
-            <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-                <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-                    <a class="flex justify-start title-font font-medium items-center text-white mb-4 md:mb-0">
-                        <span class="flex justify-center items-center w-10 h-10 text-white p-2 bg-green-700 rounded-full"><i class="fas fa-map"></i></span>
-                        <span class="ml-3 text-xl">MapEvents</span>
-                    </a>
-                    <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
-                </div>
-                <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                        <nav class="list-none mb-10">
-                            <li>
-                                <a class="text-gray-400 hover:text-white">First Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Second Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Third Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                            </li>
-                        </nav>
+        <div class="flex-grow w-screen flex justify-center items-center">
+            <div class="bg-green-700 rounded-lg p-2.5 w-4/5 md:w-1/2 md:p-10 text-white" x-data="open()" x-init="start()">
+                <h1 class="font-bold text-center text-2xl mb-2 md:text-5xl md:mb-10">MapEvents Will Open</h1>
+                <div class="w-full text-center flex flex-col items-center justify-center gap-1 text-3xl md:flex-row md:text-6xl md:gap-4">
+                    <div class="text-2xl mr-1 font-medium">in</div>
+                    <div class="flex justify-center items-center gap-1 md:gap-4">
+                        <div class="p-2 min-w-[96px] bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="days">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Days</div>
+                        </div>
+                        <div class="p-2 min-w-[96px] bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="hours">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Hours</div>
+                        </div>
+                        <div class="p-2 min-w-[96px] bg-white text-green-500 rounded-lg">
+                            <div class="font-mono leading-none" x-text="minutes">00</div>
+                            <div class="font-mono uppercase text-sm font-medium leading-none">Minutes</div>
+                        </div>
                     </div>
-                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                        <nav class="list-none mb-10">
-                            <li>
-                                <a class="text-gray-400 hover:text-white">First Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Second Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Third Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                        <nav class="list-none mb-10">
-                            <li>
-                                <a class="text-gray-400 hover:text-white">First Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Second Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Third Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                        <nav class="list-none mb-10">
-                            <li>
-                                <a class="text-gray-400 hover:text-white">First Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Second Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Third Link</a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                            </li>
-                        </nav>
+                    <div class="text-2xl font-medium">and</div>
+                    <div class="p-2 min-w-[96px] bg-white text-green-500 rounded-lg">
+                        <div class="font-mono leading-none" x-text="seconds">00</div>
+                        <div class="font-mono uppercase text-sm font-medium leading-none">Seconds</div>
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-700 bg-opacity-75">
+        </div>
+
+
+        <footer class="w-screen">
+            <div class="bg-gray-900">
                 <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                    <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 CarDistrict —
-                        <a href="https://twitter.com/" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@makcnmas</a>
+                    <p class="text-gray-400 text-sm text-center sm:text-left">© 2022 MapEvents —
+                        <a href="https://www.instagram.com/makcnmas/" rel="noopener noreferrer" class="text-gray-500 ml-1" target="_blank">@makcnmas</a>
                     </p>
                     <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-                        <a class="ml-3 text-gray-400">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="ml-3 text-gray-400">
+                        <a href="https://www.instagram.com/makcnmas/" target="_blank" class="ml-3 text-gray-400">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a class="ml-3 text-gray-400">
+                        <a href="tel:+41788305850" class="ml-3 text-gray-400">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a class="ml-3 text-gray-400" target="_blank" href="https://www.linkedin.com/in/maxime-sickenberg/">
@@ -268,7 +98,7 @@
             </div>
         </footer>
 
-        <div id="info-popup" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed bottom-0 left-0">
+        <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed bottom-0 left-0">
             <div class="relative p-4 w-full max-w-lg h-auto">
                 <div class="relative rounded-lg shadow bg-gray-800 p-8">
                     <div class="mb-4 text-sm font-light text-gray-400">
@@ -289,3 +119,45 @@
         </div>
     </body>
 </html>
+
+<script>
+    function open() {
+        return {
+            seconds: '00',
+            minutes: '00',
+            hours: '00',
+            days: '00',
+            distance: 0,
+            countdown: null,
+            openTime: new Date('04.30.2023 16:30:00').getTime(),
+            now: new Date().getTime(),
+            start: function() {
+                this.countdown = setInterval(() => {
+                    // Calculate time
+                    this.now = new Date().getTime();
+                    this.distance = this.openTime - this.now;
+                    // Set Times
+                    this.days = Math.floor(this.distance / (1000*60*60*24));                  
+                    this.hours = Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60));
+                    this.minutes = Math.floor((this.distance % (1000*60*60)) / (1000*60));
+                    this.seconds = Math.floor((this.distance % (1000*60)) / 1000);
+                    // Stop
+                    if (this.distance < 0) {
+                        clearInterval(this.countdown);
+                        this.days = '00';
+                        this.hours = '00';
+                        this.minutes = '00';
+                        this.seconds = '00';
+                    }
+                },100);
+            },
+            padNum: function(num,number) {
+                var zero = '';
+                for (var i = 0; i < 3; i++) {
+                    zero += '0';
+                }
+                return (zero + num).slice(-3);
+            }
+        }
+    }
+</script>

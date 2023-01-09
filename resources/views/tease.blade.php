@@ -49,7 +49,7 @@
         </header>      
         
         <div class="flex-grow w-screen flex justify-center items-center">
-            <div class="bg-green-700 rounded-lg p-2.5 w-4/5 md:w-1/2 md:p-10 text-white" x-data="beer()" x-init="start()">
+            <div class="bg-green-700 rounded-lg p-2.5 w-4/5 md:w-1/2 md:p-10 text-white" x-data="open()" x-init="start()">
                 <h1 class="font-bold text-center text-2xl mb-2 md:text-5xl md:mb-10">MapEvents Will Open</h1>
                 <div class="w-full text-center flex flex-col items-center justify-center gap-1 text-3xl md:flex-row md:text-6xl md:gap-4">
                     <div class="text-2xl mr-1 font-medium">in</div>
@@ -121,7 +121,7 @@
 </html>
 
 <script>
-    function beer() {
+    function open() {
         return {
             seconds: '00',
             minutes: '00',
@@ -129,13 +129,13 @@
             days: '00',
             distance: 0,
             countdown: null,
-            beerTime: new Date('April 30, 2023 16:30:00').getTime(),
+            openTime: new Date('April 30, 2023 16:30:00').getTime(),
             now: new Date().getTime(),
             start: function() {
                 this.countdown = setInterval(() => {
                     // Calculate time
                     this.now = new Date().getTime();
-                    this.distance = this.beerTime - this.now;
+                    this.distance = this.openTime - this.now;
                     // Set Times
                     this.days = this.padNum( Math.floor(this.distance / (1000*60*60*24)) );
                     this.hours = this.padNum( Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60)) );
