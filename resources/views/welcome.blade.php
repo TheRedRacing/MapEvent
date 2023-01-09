@@ -124,7 +124,7 @@
             days: '00',
             distance: 0,
             countdown: null,
-            openTime: new Date('04.30.2023 16:30:00').getTime(),
+            openTime: new Date('April 30.2023 16:30:00').getTime(),
             now: new Date().getTime(),
             start: function() {
                 this.countdown = setInterval(() => {
