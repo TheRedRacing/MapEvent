@@ -1,4 +1,0 @@
-Couleur P : bg-green-700            Couleur S : bg-gray-800
-Couleur P Hover : bg-green-800      Couleur S Hover : bg-green-700
-Text P : text-white                 Text S : text-gray-400
-
